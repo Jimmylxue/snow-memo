@@ -1,10 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* .sliderBar-container {
+.sliderBar-container {
   height: 100vh !important;
   overflow: auto !important;
 }
@@ -32,4 +26,4 @@
   to {
     width: 0px;
   }
-} */
+}
