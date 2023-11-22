@@ -27,6 +27,9 @@
     "typescript": "5.2.2"
   },
   "manifest": {
+    "permissions": [
+      "scripting"
+    ],
     "host_permissions": [
       "https://*/*"
     ]

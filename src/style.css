@@ -4,7 +4,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .sliderBar-container {
+.sliderBar-container {
+  width: 0;
   height: 100vh !important;
   overflow: auto !important;
 }
@@ -32,4 +33,4 @@
   to {
     width: 0px;
   }
-} */
+}
