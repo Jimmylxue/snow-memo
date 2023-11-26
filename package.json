@@ -8,13 +8,19 @@
     "dev": "plasmo dev",
     "build": "plasmo build",
     "package": "plasmo package",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "patch-package"
   },
   "dependencies": {
+    "@radix-ui/themes": "^2.0.1",
+    "axios": "^1.6.2",
     "classnames": "^2.3.2",
+    "lodash": "^4.17.21",
+    "patch-package": "^8.0.0",
     "plasmo": "0.84.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-query": "^3.39.3",
     "tailwindcss": "3.3.5"
   },
   "devDependencies": {
@@ -41,5 +47,10 @@
     "host_permissions": [
       "https://*/*"
     ]
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "@radix-ui/themes@2.0.1": "patches/@radix-ui__themes@2.0.1.patch"
+    }
   }
 }

@@ -1,0 +1,13 @@
+diff --git a/styles.css b/styles.css
+index 160c8b4d4118e925da2f3b6099d608ce7efad4c0..84f6cd75a0eaa5735a36a3051e359806bce885fe 100644
+--- a/styles.css
++++ b/styles.css
+@@ -180,7 +180,7 @@
+   margin: 0;
+ }
+ 
+-:root, .light, .light-theme {
++:host, .light, .light-theme {
+   --tomato-1: #fffcfc;
+   --tomato-2: #fff8f7;
+   --tomato-3: #feebe7;

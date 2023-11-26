@@ -1,8 +1,11 @@
+import { Theme } from "@radix-ui/themes"
 import cssText from "data-text:~style.css"
 import { useEffect, useState } from "react"
 
+import { config } from "~api/react-query"
 import { SliderBar } from "~components/SliderBar"
 import { useSelectInfo } from "~hooks"
+import { SliderBarContent } from "~view/SliderBarContent"
 
 // @ts-ignore
 import icon from "../../assets/icon.png"
@@ -12,19 +15,35 @@ export const getStyle = () => {
   style.textContent = cssText
   return style
 }
+
+const Root = () => {
+  const { queryClient, QueryClientProvider } = config()
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Theme accentColor="tomato" grayColor="sand" radius="large" scaling="95%">
+        <CustomButton />
+      </Theme>
+    </QueryClientProvider>
+  )
+}
+
+export default Root
+
 const CustomButton = () => {
   const { startY, endX, haveSelectedInfo } = useSelectInfo()
   const [showSliderBar, setShowSliderBar] = useState<boolean>(false)
 
-  useEffect(() => {
-    if (!haveSelectedInfo) {
-      setShowSliderBar(false)
-    }
-  }, [haveSelectedInfo])
+  // useEffect(() => {
+  //   if (!haveSelectedInfo) {
+  //     setShowSliderBar(false)
+  //   }
+  // }, [haveSelectedInfo])
 
   return (
     <div className=" plasmo-w-screen plasmo-h-full">
-      <SliderBar show={showSliderBar}>hello world</SliderBar>
+      <SliderBar show={showSliderBar}>
+        <SliderBarContent />
+      </SliderBar>
       {haveSelectedInfo && (
         <img
           src={icon}
@@ -42,5 +61,3 @@ const CustomButton = () => {
     </div>
   )
 }
-
-export default CustomButton
