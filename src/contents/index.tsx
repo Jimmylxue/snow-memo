@@ -33,11 +33,11 @@ const CustomButton = () => {
   const { startY, endX, haveSelectedInfo } = useSelectInfo()
   const [showSliderBar, setShowSliderBar] = useState<boolean>(false)
 
-  // useEffect(() => {
-  //   if (!haveSelectedInfo) {
-  //     setShowSliderBar(false)
-  //   }
-  // }, [haveSelectedInfo])
+  useEffect(() => {
+    if (!haveSelectedInfo) {
+      setShowSliderBar(false)
+    }
+  }, [haveSelectedInfo])
 
   return (
     <div className=" plasmo-w-screen plasmo-h-full">

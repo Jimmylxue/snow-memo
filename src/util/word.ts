@@ -8,7 +8,7 @@ export function isEnglishWord(word: string): boolean {
 }
 
 /**
- * 检测一段文本是否为英语句子
+ * 检测一段文本是否为纯英语句子
  * @param word
  * @returns {boolean}
  */
