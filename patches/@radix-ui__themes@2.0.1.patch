@@ -1,5 +1,5 @@
 diff --git a/styles.css b/styles.css
-index 160c8b4d4118e925da2f3b6099d608ce7efad4c0..84f6cd75a0eaa5735a36a3051e359806bce885fe 100644
+index 160c8b4d4118e925da2f3b6099d608ce7efad4c0..cc8b388515a355ef54df602fa9f3932cdbf35757 100644
 --- a/styles.css
 +++ b/styles.css
 @@ -180,7 +180,7 @@
@@ -11,3 +11,30 @@ index 160c8b4d4118e925da2f3b6099d608ce7efad4c0..84f6cd75a0eaa5735a36a3051e359806
    --tomato-1: #fffcfc;
    --tomato-2: #fff8f7;
    --tomato-3: #feebe7;
+@@ -960,7 +960,7 @@
+ 
+ @supports (color: color(display-p3 1 1 1)) {
+   @media (color-gamut: p3) {
+-    :root, .light, .light-theme {
++    :host, .light, .light-theme {
+       --tomato-1: color(display-p3 0.998 0.989 0.988);
+       --tomato-2: color(display-p3 0.994 0.974 0.969);
+       --tomato-3: color(display-p3 0.985 0.924 0.909);
+@@ -3312,7 +3312,7 @@
+   }
+ }
+ 
+-:root {
++:host {
+   --black-a1: rgba(0, 0, 0, 0.05);
+   --black-a2: rgba(0, 0, 0, 0.1);
+   --black-a3: rgba(0, 0, 0, 0.15);
+@@ -3367,7 +3367,7 @@
+ 
+ @supports (color: color(display-p3 1 1 1)) {
+   @media (color-gamut: p3) {
+-    :root {
++    :host {
+       --black-a1: color(display-p3 0 0 0 / 0.05);
+       --black-a2: color(display-p3 0 0 0 / 0.1);
+       --black-a3: color(display-p3 0 0 0 / 0.15);

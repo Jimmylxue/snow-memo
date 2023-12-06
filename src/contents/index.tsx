@@ -1,5 +1,6 @@
 import { Theme } from "@radix-ui/themes"
 import cssText from "data-text:~style.css"
+import originCss from "data-text:~styles.css"
 import hotkeys from "hotkeys-js"
 import { useEffect, useState } from "react"
 
@@ -18,6 +19,12 @@ export const getStyle = () => {
 }
 
 const Root = () => {
+  useEffect(() => {
+    const style = document.createElement("style")
+    style.textContent = originCss
+    document.body.append(style)
+  }, [])
+
   const { queryClient, QueryClientProvider } = config()
   return (
     <QueryClientProvider client={queryClient}>
@@ -39,6 +46,15 @@ const CustomButton = () => {
   //     setShowSliderBar(false)
   //   }
   // }, [haveSelectedInfo])
+
+  useEffect(() => {
+    chrome.storage.sync.get(
+      ["snow_memo_token", "snow_memo_user"],
+      async (result) => {
+        console.log("result", result)
+      }
+    )
+  }, [])
 
   useEffect(() => {
     hotkeys("ctrl+j", (e) => {

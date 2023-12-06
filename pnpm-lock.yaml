@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 patchedDependencies:
   '@radix-ui/themes@2.0.1':
-    hash: x3xpxenhqrlwpdizpmbz7rythm
+    hash: wq7f63ee372h7ecmaf4o6sveiy
     path: patches/@radix-ui__themes@2.0.1.patch
 
 specifiers:
@@ -19,6 +19,7 @@ specifiers:
   '@types/react-dom': 18.2.15
   axios: ^1.6.2
   babel-jest: ^29.7.0
+  bcryptjs: ^2.4.3
   classnames: ^2.3.2
   hotkeys-js: ^3.12.2
   jest: ^29.7.0
@@ -36,8 +37,9 @@ specifiers:
 
 dependencies:
   '@radix-ui/react-icons': 1.3.0_react@18.2.0
-  '@radix-ui/themes': 2.0.1_x3xpxenhqrlwpdizpmbz7rythm_odyphbpq4up353b3xkkenmy5wy
+  '@radix-ui/themes': 2.0.1_wq7f63ee372h7ecmaf4o6sveiy_odyphbpq4up353b3xkkenmy5wy
   axios: 1.6.2
+  bcryptjs: 2.4.3
   classnames: 2.3.2
   hotkeys-js: 3.12.2
   lodash: 4.17.21
@@ -4583,7 +4585,7 @@ packages:
       '@babel/runtime': 7.23.4
     dev: false
 
-  /@radix-ui/themes/2.0.1_x3xpxenhqrlwpdizpmbz7rythm_odyphbpq4up353b3xkkenmy5wy:
+  /@radix-ui/themes/2.0.1_wq7f63ee372h7ecmaf4o6sveiy_odyphbpq4up353b3xkkenmy5wy:
     resolution: {integrity: sha512-uO+faiGfwuIR0N9utwIfuasAmH1qRHYJtYTX2Syx0UYEtc9pPAhoCoYobZZi+J03H5WaQouvGiBN6T+UUMm+6Q==}
     peerDependencies:
       '@types/react': '*'
@@ -5531,6 +5533,10 @@ packages:
 
   /base64-js/1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
+    dev: false
+
+  /bcryptjs/2.4.3:
+    resolution: {integrity: sha512-V/Hy/X9Vt7f3BbPJEi8BdVFMByHi+jNXrYkW3huaybV/kQ0KJg0Y6PkEMbn+zeT+i+SiKZ/HMqJGIIt4LZDqNQ==}
     dev: false
 
   /big-integer/1.6.52:
