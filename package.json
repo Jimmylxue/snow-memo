@@ -15,6 +15,7 @@
     "@radix-ui/themes": "^2.0.1",
     "axios": "^1.6.2",
     "classnames": "^2.3.2",
+    "hotkeys-js": "^3.12.2",
     "lodash": "^4.17.21",
     "patch-package": "^8.0.0",
     "plasmo": "0.84.0",

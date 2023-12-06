@@ -20,6 +20,7 @@ specifiers:
   axios: ^1.6.2
   babel-jest: ^29.7.0
   classnames: ^2.3.2
+  hotkeys-js: ^3.12.2
   jest: ^29.7.0
   jest-environment-jsdom: ^29.7.0
   lodash: ^4.17.21
@@ -38,6 +39,7 @@ dependencies:
   '@radix-ui/themes': 2.0.1_x3xpxenhqrlwpdizpmbz7rythm_odyphbpq4up353b3xkkenmy5wy
   axios: 1.6.2
   classnames: 2.3.2
+  hotkeys-js: 3.12.2
   lodash: 4.17.21
   patch-package: 8.0.0
   plasmo: 0.84.0_slr6tmyjsed3nkkswsksswymwu
@@ -6688,6 +6690,10 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       function-bind: 1.1.2
+
+  /hotkeys-js/3.12.2:
+    resolution: {integrity: sha512-Fi1g0SaDMJZosXLQzs7pbFj2T9VTwvJWx0e4dURXJqa9ERhd4q9fj3XXzgKQgyEnULZh88aQl5fiMv/vxzrEBQ==}
+    dev: false
 
   /html-encoding-sniffer/3.0.0:
     resolution: {integrity: sha512-oWv4T4yJ52iKrufjnyZPkrN0CH3QnrUqdB6In1g5Fe1mia8GmF36gnfNySxoZtxD5+NmYw1EElVXiBk93UeskA==}

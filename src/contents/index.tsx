@@ -1,5 +1,6 @@
 import { Theme } from "@radix-ui/themes"
 import cssText from "data-text:~style.css"
+import hotkeys from "hotkeys-js"
 import { useEffect, useState } from "react"
 
 import { config } from "~api/react-query"
@@ -33,16 +34,27 @@ const CustomButton = () => {
   const { startY, endX, haveSelectedInfo } = useSelectInfo()
   const [showSliderBar, setShowSliderBar] = useState<boolean>(false)
 
+  // useEffect(() => {
+  //   if (!haveSelectedInfo) {
+  //     setShowSliderBar(false)
+  //   }
+  // }, [haveSelectedInfo])
+
   useEffect(() => {
-    if (!haveSelectedInfo) {
+    hotkeys("ctrl+j", (e) => {
+      e.preventDefault()
+      setShowSliderBar(true)
+    })
+    hotkeys("escape", function (e) {
+      e.preventDefault()
       setShowSliderBar(false)
-    }
-  }, [haveSelectedInfo])
+    })
+  }, [])
 
   return (
     <div className=" plasmo-w-screen plasmo-h-full">
       <SliderBar show={showSliderBar}>
-        <SliderBarContent />
+        <SliderBarContent onClose={() => setShowSliderBar(false)} />
       </SliderBar>
       {haveSelectedInfo && (
         <img
