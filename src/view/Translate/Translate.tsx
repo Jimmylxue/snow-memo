@@ -10,11 +10,16 @@ import {
   ScrollArea,
   TextArea
 } from "@radix-ui/themes"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 
-import { useTranslate, type TShortEn } from "~api"
+import { useTranslate } from "~api"
 import { useSelectInfo } from "~hooks"
-import { isEnglishSentence } from "~util"
+import {
+  countEnglishWords,
+  getTranslateDirectionByEnglishAndChinese,
+  isEnglishSentence,
+  isEnglishWord
+} from "~util"
 
 type TProps = {
   visible: boolean
@@ -28,31 +33,6 @@ export function Translate({ visible }: TProps) {
   useEffect(() => {
     setTranslateText(selectedText || "")
   }, [selectedText])
-
-  const requestParams = useMemo(() => {
-    if (translateText) {
-      const isEnglish = isEnglishSentence(translateText)
-      if (isEnglish) {
-        return {
-          from: "en",
-          to: "zh",
-          q: translateText
-        }
-      } else {
-        return {
-          from: "zh",
-          to: "en",
-          q: translateText
-        }
-      }
-    } else {
-      return {
-        from: "en",
-        to: "zh",
-        q: translateText
-      }
-    }
-  }, [translateText]) as { from: TShortEn; to: TShortEn; q: string }
 
   if (!visible) {
     return null
@@ -74,7 +54,9 @@ export function Translate({ visible }: TProps) {
         variant="soft"
         className=" plasmo-w-full plasmo-mt-2"
         onClick={async () => {
-          await mutateAsync(requestParams)
+          await mutateAsync(
+            getTranslateDirectionByEnglishAndChinese(translateText)
+          )
         }}>
         立即翻译
       </Button>
@@ -82,14 +64,11 @@ export function Translate({ visible }: TProps) {
       {data?.trans_result && (
         <>
           <Flex justify="between" my="2">
-            {isEnglishSentence(data?.trans_result[0].dst) ? (
-              <Badge color="green">句子</Badge>
-            ) : (
+            {isEnglishWord(data?.trans_result[0].dst) ? (
               <Badge color="blue">单词</Badge>
+            ) : (
+              <Badge color="green">句子</Badge>
             )}
-            {/* <IconButton size="1">
-              <StarIcon width="12" height="12" />
-            </IconButton> */}
           </Flex>
           <div>
             <ScrollArea type="always" scrollbars="vertical">

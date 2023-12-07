@@ -59,7 +59,7 @@ const CustomButton = () => {
   useEffect(() => {
     hotkeys("ctrl+j", (e) => {
       e.preventDefault()
-      setShowSliderBar(true)
+      setShowSliderBar((flag) => !flag)
     })
     hotkeys("escape", function (e) {
       e.preventDefault()
