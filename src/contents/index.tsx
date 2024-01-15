@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import { config } from "~api/react-query"
 import { SliderBar } from "~components/SliderBar"
 import { useSelectInfo } from "~hooks"
+import { UserProvider } from "~hooks/useUser"
 import { SliderBarContent } from "~view/SliderBarContent"
 
 // @ts-ignore
@@ -28,9 +29,15 @@ const Root = () => {
   const { queryClient, QueryClientProvider } = config()
   return (
     <QueryClientProvider client={queryClient}>
-      <Theme accentColor="tomato" grayColor="sand" radius="large" scaling="95%">
-        <CustomButton />
-      </Theme>
+      <UserProvider>
+        <Theme
+          accentColor="tomato"
+          grayColor="sand"
+          radius="large"
+          scaling="95%">
+          <CustomButton />
+        </Theme>
+      </UserProvider>
     </QueryClientProvider>
   )
 }
@@ -40,21 +47,6 @@ export default Root
 const CustomButton = () => {
   const { startY, endX, haveSelectedInfo } = useSelectInfo()
   const [showSliderBar, setShowSliderBar] = useState<boolean>(false)
-
-  // useEffect(() => {
-  //   if (!haveSelectedInfo) {
-  //     setShowSliderBar(false)
-  //   }
-  // }, [haveSelectedInfo])
-
-  useEffect(() => {
-    chrome.storage.sync.get(
-      ["snow_memo_token", "snow_memo_user"],
-      async (result) => {
-        console.log("result", result)
-      }
-    )
-  }, [])
 
   useEffect(() => {
     hotkeys("ctrl+j", (e) => {

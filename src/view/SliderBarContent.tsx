@@ -3,6 +3,7 @@ import { Quote, Strong } from "@radix-ui/themes"
 
 import { UserInfo } from "~components/UserInfo"
 
+import { Recite } from "./Recite"
 import { Translate } from "./Translate/Translate"
 
 type TProps = {
@@ -20,7 +21,7 @@ export function SliderBarContent({ onClose }: TProps) {
       </div>
       <UserInfo />
       <Translate visible />
-      {/* <Recite /> */}
+      <Recite />
     </div>
   )
 }

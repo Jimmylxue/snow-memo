@@ -2,7 +2,7 @@ import { useMutation, type UseMutationOptions } from "react-query"
 
 import { post, type ClientError } from "~api/client"
 
-import type { TUserLoginParams, TUserRegisterParams } from "./type"
+import type { TUserLoginByMailParams, TUserRegisterByMailParams } from "./type"
 
 export type TLoginUser = {
   id: number
@@ -13,14 +13,14 @@ export type TLoginUser = {
   createTime: string
 }
 
-export function useUserLogin(
+export function useUserLoginByMail(
   options?: UseMutationOptions<
     {
       token: string
       user: TLoginUser
     },
     ClientError,
-    TUserLoginParams
+    TUserLoginByMailParams
   >
 ) {
   return useMutation<
@@ -29,18 +29,38 @@ export function useUserLogin(
       user: TLoginUser
     },
     ClientError,
-    TUserLoginParams
-  >((data) => post("user/login", data), options)
+    TUserLoginByMailParams
+  >((data) => post("user/login_by_mail", data), options)
 }
 
-export function useUserRegister(
+export function useUserRegisterByMail(
+  options?: UseMutationOptions<
+    {
+      token: string
+      user: TLoginUser
+    },
+    ClientError,
+    TUserRegisterByMailParams
+  >
+) {
+  return useMutation<
+    {
+      token: string
+      user: TLoginUser
+    },
+    ClientError,
+    TUserRegisterByMailParams
+  >((data) => post("user/register_by_mail", data), options)
+}
+
+export function useSendMail(
   options?: UseMutationOptions<
     {
       code: number
       result: string
     },
     ClientError,
-    TUserRegisterParams
+    { mail: string }
   >
 ) {
   return useMutation<
@@ -49,6 +69,6 @@ export function useUserRegister(
       result: string
     },
     ClientError,
-    TUserRegisterParams
-  >((data) => post("user/register", data), options)
+    { mail: string }
+  >((data) => post("mail/send_verification_code", data), options)
 }

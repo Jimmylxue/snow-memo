@@ -1,31 +1,25 @@
-import { LinkBreak1Icon } from "@radix-ui/react-icons"
-import {
-  Avatar,
-  Box,
-  Button,
-  Card,
-  Dialog,
-  Flex,
-  Text,
-  TextField
-} from "@radix-ui/themes"
+import { LinkBreak1Icon, PaperPlaneIcon } from "@radix-ui/react-icons"
+import { Avatar, Box, Card, Flex, Text } from "@radix-ui/themes"
 
+import { ConfirmModal } from "~components/Confirm"
 import { Login } from "~components/Login/Login"
+import { useUser } from "~hooks/useUser"
 
 export function UserInfo() {
+  const { user, logout } = useUser()
   return (
     <>
       <Card mt="2" mb="2">
         <Flex gap="3" align="center">
           <Avatar
             size="3"
-            src="https://avatars.githubusercontent.com/u/65758455?v=4"
+            src={user?.avatar}
             radius="full"
-            fallback="T"
+            fallback={user?.username || "U"}
           />
           <Box>
             <Text as="div" size="2" weight="bold">
-              Jimmy
+              {user?.username}
             </Text>
             <Text
               className=" plasmo-flex-grow"
@@ -42,14 +36,20 @@ export function UserInfo() {
             </Text>
           </Box>
           <Box className=" plasmo-max-w-sm plasmo-flex-shrink-0 plasmo-ml-auto">
-            <Login>
-              <LinkBreak1Icon
-                className=" plasmo-cursor-pointer"
-                onClick={() => {
-                  console.log("close")
-                }}
-              />
-            </Login>
+            {user?.username ? (
+              <ConfirmModal
+                titles="确定退出登录吗"
+                describe="退出后无法体验完整功能~"
+                onConfirm={() => {
+                  logout()
+                }}>
+                <LinkBreak1Icon className=" plasmo-cursor-pointer" />
+              </ConfirmModal>
+            ) : (
+              <Login>
+                <PaperPlaneIcon className=" plasmo-cursor-pointer" />
+              </Login>
+            )}
           </Box>
         </Flex>
       </Card>

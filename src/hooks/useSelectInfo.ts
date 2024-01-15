@@ -45,8 +45,8 @@ export function useSelectInfo() {
         })
       }
       // 打印选中文本和位置信息
-      console.log("Selected text:", selection.toString())
-      console.log("Selection coordinates:", startX, startY, endX, endY)
+      // console.log("Selected text:", selection.toString())
+      // console.log("Selection coordinates:", startX, startY, endX, endY)
     }
     var startX, startY, endX, endY
     document.addEventListener("mousedown", mouseDownEvent)
