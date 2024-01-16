@@ -12,14 +12,9 @@ import {
 } from "@radix-ui/themes"
 import { useEffect, useState } from "react"
 
-import { useTranslate } from "~api"
-import { useSelectInfo } from "~hooks"
-import {
-  countEnglishWords,
-  getTranslateDirectionByEnglishAndChinese,
-  isEnglishSentence,
-  isEnglishWord
-} from "~util"
+import { useSaveWord, useTranslate, useUserWords } from "~api"
+import { useSelectInfo, useUser } from "~hooks"
+import { getTranslateDirectionByEnglishAndChinese, isEnglishWord } from "~util"
 
 type TProps = {
   visible: boolean
@@ -27,8 +22,10 @@ type TProps = {
 
 export function Translate({ visible }: TProps) {
   const [translateText, setTranslateText] = useState<string>("")
+  const { user } = useUser()
   const { selectedText } = useSelectInfo()
   const { data, mutateAsync } = useTranslate()
+  const { mutateAsync: saveWord } = useSaveWord()
 
   useEffect(() => {
     setTranslateText(selectedText || "")
@@ -69,6 +66,20 @@ export function Translate({ visible }: TProps) {
             ) : (
               <Badge color="green">句子</Badge>
             )}
+            <IconButton
+              color="indigo"
+              variant="soft"
+              size="1"
+              onClick={async () => {
+                await saveWord({
+                  languageId: 1001,
+                  word: translateText,
+                  chineseMean: data.trans_result[0].dst
+                })
+                alert("记录成功")
+              }}>
+              <StarIcon width="12" height="12" />
+            </IconButton>
           </Flex>
           <div>
             <ScrollArea type="always" scrollbars="vertical">

@@ -24,8 +24,8 @@ interface ResultData<T = any> extends Result {
   result?: T
 }
 // const URL: string = import.meta.env.VITE_APP_API_BASE_URL
-// const URL: string = "http://127.0.0.1:9999"
-const URL: string = "https://api.jimmyxuexue.top/"
+const URL: string = "http://127.0.0.1:9999"
+// const URL: string = "https://api.jimmyxuexue.top/"
 enum RequestEnums {
   TIMEOUT = 20000,
   OVERDUE = 600, // 登录失效
@@ -67,12 +67,13 @@ class RequestHttp {
 
     this.service.interceptors.request.use(
       // @ts-ignore
-      (config: AxiosRequestConfig) => {
-        const token = localStorage.getItem("token") || ""
+      async (config: AxiosRequestConfig) => {
+        const token = (await chrome.storage.sync.get("snow_memo_token")) || ""
         return {
           ...config,
           headers: {
-            Authorization: "Bearer " + token // 请求头中携带token信息
+            // @ts-ignore
+            Authorization: "Bearer " + token?.snow_memo_token || "" // 请求头中携带token信息
           }
         }
       },
