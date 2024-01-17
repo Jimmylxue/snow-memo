@@ -12,10 +12,14 @@ import {
 } from "@radix-ui/themes"
 import { useEffect, useState } from "react"
 
-import { useSaveWord, useTranslate, useUserWords } from "~api"
-import { useSelectInfo, useUser } from "~hooks"
+import { useSaveWord, useTranslate } from "~api"
+import { useSelectInfo } from "~hooks"
 import { useToast } from "~hooks/useToast"
-import { getTranslateDirectionByEnglishAndChinese, isEnglishWord } from "~util"
+import {
+  getChineseWordCount,
+  getTranslateDirectionByEnglishAndChinese,
+  isEnglishWord
+} from "~util"
 
 type TProps = {
   visible: boolean
@@ -72,11 +76,16 @@ export function Translate({ visible }: TProps) {
               variant="soft"
               size="1"
               onClick={async () => {
-                await saveWord({
+                const params = {
                   languageId: 1001,
                   word: translateText,
                   chineseMean: data.trans_result[0].dst
-                })
+                }
+                if (getChineseWordCount(translateText) > 0) {
+                  params.chineseMean = translateText
+                  params.word = data.trans_result[0].dst
+                }
+                await saveWord(params)
                 toast("记录成功")
               }}>
               <StarIcon width="12" height="12" />

@@ -47,8 +47,8 @@ export type TBaiduFanyi = {
   to: TShortEn
   trans_result: [
     {
-      src: "string"
-      dst: "string"
+      src: string
+      dst: string
     }
   ]
   // 失败
