@@ -24,8 +24,8 @@ interface ResultData<T = any> extends Result {
   result?: T
 }
 // const URL: string = import.meta.env.VITE_APP_API_BASE_URL
-const URL: string = "http://127.0.0.1:9999"
-// const URL: string = "https://api.jimmyxuexue.top/"
+// const URL: string = "http://127.0.0.1:9999"
+const URL: string = "https://api.jimmyxuexue.top/"
 enum RequestEnums {
   TIMEOUT = 20000,
   OVERDUE = 600, // 登录失效

@@ -14,6 +14,7 @@ import { useEffect, useState } from "react"
 
 import { useSaveWord, useTranslate, useUserWords } from "~api"
 import { useSelectInfo, useUser } from "~hooks"
+import { useToast } from "~hooks/useToast"
 import { getTranslateDirectionByEnglishAndChinese, isEnglishWord } from "~util"
 
 type TProps = {
@@ -22,7 +23,7 @@ type TProps = {
 
 export function Translate({ visible }: TProps) {
   const [translateText, setTranslateText] = useState<string>("")
-  const { user } = useUser()
+  const { toast } = useToast()
   const { selectedText } = useSelectInfo()
   const { data, mutateAsync } = useTranslate()
   const { mutateAsync: saveWord } = useSaveWord()
@@ -76,7 +77,7 @@ export function Translate({ visible }: TProps) {
                   word: translateText,
                   chineseMean: data.trans_result[0].dst
                 })
-                alert("记录成功")
+                toast("记录成功")
               }}>
               <StarIcon width="12" height="12" />
             </IconButton>

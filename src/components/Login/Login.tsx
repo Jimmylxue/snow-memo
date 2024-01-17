@@ -2,16 +2,21 @@ import { Button, Dialog, Flex, Text, TextField } from "@radix-ui/themes"
 import { useState, type HTMLAttributes } from "react"
 
 import { useSendMail, useUserLoginByMail, useUserRegisterByMail } from "~api"
+import { useUser } from "~hooks"
+import { useToast } from "~hooks/useToast"
 import { isQQMail } from "~util"
 
 interface TProps extends HTMLAttributes<HTMLDivElement> {}
 
 export function Login({ children }: TProps) {
+  const { setUser } = useUser()
+  const { toast } = useToast()
   const [modalType, setModalType] = useState<"login" | "register">("login")
   const [mail, setMail] = useState<string>("")
   const [code, setCode] = useState<string>("")
   const { mutateAsync: loginByMailFn } = useUserLoginByMail({
     onSuccess: (res) => {
+      setUser(res?.user)
       chrome.storage.sync.set({
         snow_memo_token: res.token,
         snow_memo_user: res.user
@@ -20,6 +25,7 @@ export function Login({ children }: TProps) {
   })
   const { mutateAsync: registerByMailFn } = useUserRegisterByMail({
     onSuccess: (res) => {
+      setUser(res?.user)
       chrome.storage.sync.set({
         snow_memo_token: res.token,
         snow_memo_user: res.user
@@ -75,13 +81,13 @@ export function Login({ children }: TProps) {
               <Button
                 onClick={async () => {
                   if (!isQQMail(mail)) {
-                    alert("请输入正确的qq邮箱地址")
+                    toast("请输入正确的qq邮箱地址")
                     return
                   }
                   await sendMailFn({
                     mail
                   })
-                  alert("发送成功")
+                  toast("发送成功")
                 }}>
                 发送验证码
               </Button>
@@ -121,7 +127,7 @@ export function Login({ children }: TProps) {
               <Button
                 onClick={async () => {
                   if (!isQQMail(mail)) {
-                    alert("请输入正确的qq邮箱地址")
+                    toast("请输入正确的qq邮箱地址")
                     return
                   }
                   await loginByMailFn({
@@ -135,7 +141,7 @@ export function Login({ children }: TProps) {
               <Button
                 onClick={async () => {
                   if (!isQQMail(mail)) {
-                    alert("请输入正确的qq邮箱地址")
+                    toast("请输入正确的qq邮箱地址")
                     return
                   }
                   await registerByMailFn({
