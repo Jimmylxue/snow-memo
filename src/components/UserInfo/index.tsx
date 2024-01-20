@@ -3,7 +3,6 @@ import { Avatar, Box, Card, Flex, Text } from "@radix-ui/themes"
 
 import { ConfirmModal } from "~components/Confirm"
 import { Login } from "~components/Login/Login"
-import { useToast } from "~hooks/useToast"
 import { useUser } from "~hooks/useUser"
 
 export function UserInfo() {
@@ -16,7 +15,7 @@ export function UserInfo() {
             size="3"
             src={user?.avatar}
             radius="full"
-            fallback={user?.username || "U"}
+            fallback={user?.username?.substring(0, 1) || "U"}
           />
           <Box>
             <Text as="div" size="2" weight="bold">

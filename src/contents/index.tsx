@@ -6,9 +6,7 @@ import { useEffect, useState } from "react"
 
 import { config } from "~api/react-query"
 import { SliderBar } from "~components/SliderBar"
-import { Toast } from "~components/Toast"
 import { useSelectInfo } from "~hooks"
-import { ToastProvider } from "~hooks/useToast"
 import { UserProvider } from "~hooks/useUser"
 import { SliderBarContent } from "~view/SliderBarContent"
 
@@ -32,16 +30,13 @@ const Root = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <UserProvider>
-        <ToastProvider>
-          <Theme
-            accentColor="tomato"
-            grayColor="sand"
-            radius="large"
-            scaling="95%">
-            <CustomButton />
-          </Theme>
-          <Toast />
-        </ToastProvider>
+        <Theme
+          accentColor="tomato"
+          grayColor="sand"
+          radius="large"
+          scaling="95%">
+          <CustomButton />
+        </Theme>
       </UserProvider>
     </QueryClientProvider>
   )

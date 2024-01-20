@@ -1,3 +1,4 @@
+import { message } from "antd"
 import axios, {
   AxiosError,
   type AxiosInstance,
@@ -48,8 +49,7 @@ type TResponse = {
 }
 
 const handle401 = debounce(() => {
-  // message.error("未登录 请重新登录")
-  console.error("未登录 请重新登录")
+  message.error("未登录 请重新登录")
   localStorage.setItem("login-user", "")
 }, 500)
 
@@ -98,8 +98,8 @@ class RequestHttp {
         } // 全局错误信息拦截（防止下载文件得时候返回数据流，没有code，直接报错）
         if (data.code && data.code !== RequestEnums.SUCCESS) {
           // ElMessage.error(data) // 此处也可以使用组件提示报错信息
-          // message.error(data.message || data.result)
-          console.error(data.message || data.result)
+          message.error(data.message || data.result)
+          // console.error(data.message || data.result)
           return data
         }
 

@@ -1,16 +1,15 @@
 import { Button, Dialog, Flex, Text, TextField } from "@radix-ui/themes"
-import { useState, type HTMLAttributes } from "react"
+import { message } from "antd"
+import { useEffect, useState, type HTMLAttributes } from "react"
 
 import { useSendMail, useUserLoginByMail, useUserRegisterByMail } from "~api"
 import { useUser } from "~hooks"
-import { useToast } from "~hooks/useToast"
 import { isQQMail } from "~util"
 
 interface TProps extends HTMLAttributes<HTMLDivElement> {}
 
 export function Login({ children }: TProps) {
   const { setUser } = useUser()
-  const { toast } = useToast()
   const [modalType, setModalType] = useState<"login" | "register">("login")
   const [mail, setMail] = useState<string>("")
   const [code, setCode] = useState<string>("")
@@ -33,6 +32,20 @@ export function Login({ children }: TProps) {
     }
   })
   const { mutateAsync: sendMailFn } = useSendMail()
+  const [count, setCount] = useState<number>(60)
+
+  useEffect(() => {
+    if (count === 60) {
+      return
+    }
+    if (count === 0) {
+      setCount(60)
+    } else {
+      setTimeout(() => {
+        setCount((count) => --count)
+      }, 1000)
+    }
+  }, [count])
   return (
     <Dialog.Root>
       <Dialog.Trigger>{children}</Dialog.Trigger>
@@ -80,16 +93,19 @@ export function Login({ children }: TProps) {
               </div>
               <Button
                 onClick={async () => {
-                  if (!isQQMail(mail)) {
-                    toast("请输入正确的qq邮箱地址")
-                    return
+                  if (count === 60) {
+                    if (!isQQMail(mail)) {
+                      message.error("请输入正确的qq邮箱地址")
+                      return
+                    }
+                    await sendMailFn({
+                      mail
+                    })
+                    message.success("发送成功")
+                    setCount((count) => --count)
                   }
-                  await sendMailFn({
-                    mail
-                  })
-                  toast("发送成功")
                 }}>
-                发送验证码
+                {count === 60 ? "发送验证码" : count + "秒后重试"}
               </Button>
             </Flex>
           </label>
@@ -127,7 +143,7 @@ export function Login({ children }: TProps) {
               <Button
                 onClick={async () => {
                   if (!isQQMail(mail)) {
-                    toast("请输入正确的qq邮箱地址")
+                    message.error("请输入正确的qq邮箱地址")
                     return
                   }
                   await loginByMailFn({
@@ -141,7 +157,7 @@ export function Login({ children }: TProps) {
               <Button
                 onClick={async () => {
                   if (!isQQMail(mail)) {
-                    toast("请输入正确的qq邮箱地址")
+                    message.error("请输入正确的qq邮箱地址")
                     return
                   }
                   await registerByMailFn({

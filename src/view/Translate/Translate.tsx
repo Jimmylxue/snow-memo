@@ -10,11 +10,11 @@ import {
   ScrollArea,
   TextArea
 } from "@radix-ui/themes"
+import { message } from "antd"
 import { useEffect, useState } from "react"
 
 import { useSaveWord, useTranslate } from "~api"
 import { useSelectInfo } from "~hooks"
-import { useToast } from "~hooks/useToast"
 import {
   getChineseWordCount,
   getTranslateDirectionByEnglishAndChinese,
@@ -27,7 +27,6 @@ type TProps = {
 
 export function Translate({ visible }: TProps) {
   const [translateText, setTranslateText] = useState<string>("")
-  const { toast } = useToast()
   const { selectedText } = useSelectInfo()
   const { data, mutateAsync } = useTranslate()
   const { mutateAsync: saveWord } = useSaveWord()
@@ -86,7 +85,7 @@ export function Translate({ visible }: TProps) {
                   params.word = data.trans_result[0].dst
                 }
                 await saveWord(params)
-                toast("记录成功")
+                message.success("记录成功")
               }}>
               <StarIcon width="12" height="12" />
             </IconButton>
